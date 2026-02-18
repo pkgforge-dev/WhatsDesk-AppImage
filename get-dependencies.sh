@@ -43,7 +43,7 @@ get-debloated-pkgs --add-common --prefer-nano
 #mv -v ./opt/whatsdesk ./AppDir/bin
 #make-aur-package whatsdesk-bin
 #else
-    echo "Making nightl build of WhatsDesk for aarch64..."
+    echo "Making nightly build of WhatsDesk for aarch64..."
     echo "---------------------------------------------------------------"
     REPO="https://gitlab.com/zerkc/whatsdesk.git"
     VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
