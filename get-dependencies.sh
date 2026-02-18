@@ -10,8 +10,6 @@ pacman -Syu --noconfirm \
   nodejs \
   libappindicator-gtk3 \
   libnotify \
-  libxss \
-  libxtst \
   npm \
 	nss            \
 	nspr		   \
