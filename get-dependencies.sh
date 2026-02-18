@@ -10,6 +10,7 @@ pacman -Syu --noconfirm  \
 	dbus-broker			 \
  	nodejs 				 \
  	libappindicator-gtk3 \
+	libxcrypt-compat	 \
 	libnotify 			 \
 	npm 				 \
 	nss      	         \
@@ -53,7 +54,9 @@ get-debloated-pkgs --add-common --prefer-nano
     cd ./whatsdesk
     npm install
     npm run build
-
-	mv -v dist/linux-unpacked/. ./AppDir/bin
+	cd dist/linux-unpacked
+	ls
+	cd ../..
+	mv -v dist/linux-unpacked/* ./AppDir/bin
     mv -v dist/linux-unpacked/whatsdesk ./AppDir/bin
 #fi
