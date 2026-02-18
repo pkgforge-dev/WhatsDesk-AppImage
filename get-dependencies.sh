@@ -26,7 +26,7 @@ get-debloated-pkgs --add-common --prefer-nano
 #make-aur-package PACKAGENAME
 
 # If the application needs to be manually built that has to be done down here
-echo "Making nightly build of WhatsDesk for aarch64..."
+echo "Making nightly build of WhatsDesk..."
 echo "---------------------------------------------------------------"
 REPO="https://gitlab.com/zerkc/whatsdesk.git"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
