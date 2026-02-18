@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=whatsdesk
-Exec=/opt/whatsdesk/whatsdesk %U
+Exec=whatsdesk %U
 Terminal=false
 Type=Application
 Icon=whatsdesk
