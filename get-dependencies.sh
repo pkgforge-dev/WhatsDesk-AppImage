@@ -25,29 +25,23 @@ get-debloated-pkgs --add-common --prefer-nano
 #make-aur-package PACKAGENAME
 
 # If the application needs to be manually built that has to be done down here
-if [ "${ARCH}" = x86_64 ]; then
-echo "Getting app..."
-echo "---------------------------------------------------------------"
-#case "$ARCH" in # they use AMD64 for the deb links
-#	x86_64)  deb_arch=amd64;;
-#esac
-#BASE_URL="https://zerkc.gitlab.io"
-#DEB_FILENAME=$(curl -s $BASE_URL/ | grep -oP "whatsdesk_[\d\.]+_$ARCH\.deb" | head -n 1)
-#DEB_LINK="$BASE_URL/$DEB_FILENAME"
-DEB_LINK="https://zerkc.gitlab.io/whatsdesk/whatsdesk_0.3.12_amd64.deb"
-echo "$DEB_FILENAME" | sed -E "s/whatsdesk_(.*)_amd64\.deb/\1/" > ~/version
-if ! wget --retry-connrefused --tries=30 "$DEB_LINK" -O /tmp/app.deb 2>/tmp/download.log; then
-	cat /tmp/download.log
-	exit 1
-fi
+#if [ "${ARCH}" = x86_64 ]; then
+#echo "Getting app..."
+#echo "---------------------------------------------------------------"
+#DEB_LINK="https://zerkc.gitlab.io/whatsdesk/whatsdesk_0.3.12_amd64.deb"
+#echo "$DEB_FILENAME" | sed -E "s/whatsdesk_(.*)_amd64\.deb/\1/" > ~/version
+#if ! wget --retry-connrefused --tries=30 "$DEB_LINK" -O /tmp/app.deb 2>/tmp/download.log; then
+#	cat /tmp/download.log
+#	exit 1
+#fi
 
-ar xvf /tmp/app.deb
-tar -xvf ./data.tar.xz
-rm -f ./*.xz
-rm -rf ./usr/share
-#mv -v ./usr ./AppDir
-mv -v ./opt/whatsdesk ./AppDir/bin
-else
+#ar xvf /tmp/app.deb
+#tar -xvf ./data.tar.xz
+#rm -f ./*.xz
+#rm -rf ./usr/share
+#mv -v ./opt/whatsdesk ./AppDir/bin
+#make-aur-package whatsdesk-bin
+#else
     echo "Making nightl build of WhatsDesk for aarch64..."
     echo "---------------------------------------------------------------"
     REPO="https://gitlab.com/zerkc/whatsdesk.git"
@@ -59,6 +53,7 @@ else
     cd ./whatsdesk
     npm install
     npm run build
-    cd dist
 
-fi
+	mv -v dist/linux-unpacked/. ./AppDir/bin
+    mv -v dist/linux-unpacked/whatsdesk ./AppDir/bin
+#fi
