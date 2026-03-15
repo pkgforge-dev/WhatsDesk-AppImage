@@ -13,24 +13,18 @@ pacman -Syu --noconfirm  \
 	libxcrypt-compat	 \
 	libnotify 			 \
 	npm 				 \
-	nss      	         \
-	nspr		     	 \
 	pipewire-audio 		 \
 	pipewire-jack
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 
-# Comment this out if you need an AUR package
-#make-aur-package PACKAGENAME
-
-# If the application needs to be manually built that has to be done down here
-echo "Making nightly build of WhatsDesk..."
+echo "Building WhatsDesk..."
 echo "---------------------------------------------------------------"
 REPO="https://gitlab.com/zerkc/whatsdesk.git"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-git clone "$REPO" ./whatsdesk
+git clone --depth 1 "$REPO" ./whatsdesk
 echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
