@@ -13,30 +13,35 @@ pacman -Syu --noconfirm  \
 	libxcrypt-compat	 \
 	libnotify 			 \
 	npm 				 \
-	nss      	         \
-	nspr		     	 \
 	pipewire-audio 		 \
-	pipewire-jack
+	pipewire-jack		 \
+	pnpm
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 
-# Comment this out if you need an AUR package
-#make-aur-package PACKAGENAME
-
-# If the application needs to be manually built that has to be done down here
-echo "Making nightly build of WhatsDesk..."
+echo "Building WhatsDesk..."
 echo "---------------------------------------------------------------"
 REPO="https://gitlab.com/zerkc/whatsdesk.git"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-git clone "$REPO" ./whatsdesk
+git clone --depth 1 "$REPO" ./whatsdesk
 echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
 cd ./whatsdesk
 npm install
-npm run build
+
+case "$ARCH" in
+	aarch64) EB_ARCH="arm64" ;;
+	*)       EB_ARCH="x64" ;;
+esac
+if [ "$EB_ARCH" != "x64" ]; then
+	sed -i "s/builder\.Arch\.x64/builder.Arch.$EB_ARCH/" build.js
+fi
+
+BUILD_TARGETS=dir BUILD_SKIP_PUBLIC=true npm run build
+
 if [ "$ARCH" = "aarch64" ]; then
 	mv -v dist/linux-arm64-unpacked/* ../AppDir/bin
 else
