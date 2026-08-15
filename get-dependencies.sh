@@ -20,10 +20,6 @@ echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 
-# Comment this out if you need an AUR package
-#make-aur-package PACKAGENAME
-
-# If the application needs to be manually built that has to be done down here
 echo "Making nightly build of WhatsDesk..."
 echo "---------------------------------------------------------------"
 REPO="https://gitlab.com/zerkc/whatsdesk.git"
