@@ -20,7 +20,7 @@ echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 
-echo "Making nightly build of WhatsDesk..."
+echo "Building WhatsDesk..."
 echo "---------------------------------------------------------------"
 REPO="https://gitlab.com/zerkc/whatsdesk.git"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
