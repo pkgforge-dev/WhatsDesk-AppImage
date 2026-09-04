@@ -7,7 +7,7 @@
 [![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/WhatsDesk-AppImage)](https://github.com/pkgforge-dev/WhatsDesk-AppImage/releases/latest)
 
 <p align="center">
-  <img src="https://github.com/pkgforge-dev/WhatsDesk-AppImage/blob/main/AppDir/whatsdesk.png" width="128" />
+  <img src="https://gitlab.com/zerkc/whatsdesk/-/raw/master/src/icon/logo.png?ref_type=heads" width="128" />
 </p>
 
 
