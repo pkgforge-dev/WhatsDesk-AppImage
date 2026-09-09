@@ -24,7 +24,7 @@ echo "Building WhatsDesk..."
 echo "---------------------------------------------------------------"
 REPO="https://gitlab.com/zerkc/whatsdesk.git"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-git clone "$REPO" ./whatsdesk
+git clone --depth 1 "$REPO" ./whatsdesk
 echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
