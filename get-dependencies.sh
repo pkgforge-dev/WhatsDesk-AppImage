@@ -14,7 +14,8 @@ pacman -Syu --noconfirm  \
 	libnotify 			 \
 	npm 				 \
 	pipewire-audio 		 \
-	pipewire-jack
+	pipewire-jack		 \
+	pnpm
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
@@ -30,7 +31,17 @@ echo "$VERSION" > ~/version
 mkdir -p ./AppDir/bin
 cd ./whatsdesk
 npm install
-npm run build
+
+case "$ARCH" in
+	aarch64) EB_ARCH="arm64" ;;
+	*)       EB_ARCH="x64" ;;
+esac
+if [ "$EB_ARCH" != "x64" ]; then
+	sed -i "s/builder\.Arch\.x64/builder.Arch.$EB_ARCH/" build.js
+fi
+
+BUILD_TARGETS=dir BUILD_SKIP_PUBLIC=true npm run build
+
 if [ "$ARCH" = "aarch64" ]; then
 	mv -v dist/linux-arm64-unpacked/* ../AppDir/bin
 else
